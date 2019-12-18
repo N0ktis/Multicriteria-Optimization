@@ -8,6 +8,17 @@ def norma(w, s):
     return w
 
 
+def consistency_relation(A, A_sum):
+    A_max = 0
+    c_r = 0
+    for i in range(len(A)):
+        for j in range(len(A[i])):
+            A_max += A[j][i]
+        c_r += A_max * A_sum[i][1]
+        A_max = 0
+    return (c_r - 4) / 3
+
+
 def print_matrix(A):
     for i in range(0, len(A), 1):
         for j in range(0, len(A[i]), 1):
@@ -172,6 +183,7 @@ def hierarchy_analysis(A):
         print(A[i + 1][0], '%.3f' % A_1[i][0], ' ' * 10 + '|', '%.3f' % A_1[i][1], ' ' * 10 + '|', '%.3f' % A_1[i][2],
               ' ' * 10 + '|', '%.3f' % A_1[i][3], ' ' * 10 + '|',
               '%.3f' % A_sum1[i][0], ' ' + '|', '%.3f' % A_sum1[i][1], ' ' * 6 + '|')
+    print("Consistency relation:", '%.3f' % consistency_relation(A_1, A_sum1))
     print()
 
     print(A[0][2][:-1] + ':')
@@ -182,6 +194,7 @@ def hierarchy_analysis(A):
         print(A[i + 1][0], '%.3f' % A_2[i][0], ' ' * 10 + '|', '%.3f' % A_2[i][1], ' ' * 10 + '|', '%.3f' % A_2[i][2],
               ' ' * 10 + '|', '%.3f' % A_2[i][3], ' ' * 10 + '|',
               '%.3f' % A_sum2[i][0], ' ' + '|', '%.3f' % A_sum2[i][1], ' ' * 6 + '|')
+    print("Consistency relation:", '%.3f' % consistency_relation(A_2, A_sum2))
     print()
 
     print(A[0][3][:-1] + ':')
@@ -192,7 +205,9 @@ def hierarchy_analysis(A):
         print(A[i + 1][0], '%.3f' % A_3[i][0], ' ' * 10 + '|', '%.3f' % A_3[i][1], ' ' * 10 + '|', '%.3f' % A_3[i][2],
               ' ' * 10 + '|', '%.3f' % A_3[i][3], ' ' * 10 + '|',
               '%.3f' % A_sum3[i][0], ' ' + '|', '%.3f' % A_sum3[i][1], ' ' * 6 + '|')
+    print("Consistency relation:", '%.3f' % consistency_relation(A_3, A_sum3))
     print()
+
     print(A[0][4][:-1] + ':')
     print(' ' * 16 + '|', A[1][0], A[2][0], A[3][0], A[4][0], "  Sum  |", "  Norm sum  |")
     print(
@@ -201,6 +216,7 @@ def hierarchy_analysis(A):
         print(A[i + 1][0], '%.3f' % A_4[i][0], ' ' * 10 + '|', '%.3f' % A_4[i][1], ' ' * 10 + '|', '%.3f' % A_4[i][2],
               ' ' * 10 + '|', '%.3f' % A_4[i][3], ' ' * 10 + '|',
               '%.3f' % A_sum4[i][0], ' ' + '|', '%.3f' % A_sum4[i][1], ' ' * 6 + '|')
+    print("Consistency relation:", '%.3f' % consistency_relation(A_4, A_sum4))
     print()
 
     print("Criteries:")
@@ -212,12 +228,14 @@ def hierarchy_analysis(A):
               '%.3f' % A_crit[i][1], ' ' * 9 + '|', '%.3f' % A_crit[i][2],
               ' ' * 10 + '|', '%.3f' % A_crit[i][3], ' ' * 14 + '|',
               '%.3f' % A_sum_crit[i][0], ' ' + '|', '%.3f' % A_sum_crit[i][1], ' ' * 6 + '|')
-
+    print("Consistency relation:", '%.3f' % consistency_relation(A_crit, A_sum_crit))
+    print()
     for i in range(0, 4):
         for j in range(0, len(sum_crit[i])):
             buff_matr[i][j] = sum_crit[i][j][1]
         buff_matr_crit[i] = A_sum_crit[i][1]
     print()
+
     print("Sum matrix:")
     for i in range(4):
         print('%.3f' % buff_matr[i][0], '|', '%.3f' % buff_matr[i][1], '|', '%.3f' % buff_matr[i][2], '|',
